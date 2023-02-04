@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="shortcut icon" type="image/png" href="milktea.avif" />
+    <link rel="icon" href="<%= BASE_URL %>milktea.avif">
+    <title>RESTAURANT</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css">
+</head>
+
+<body>
+    <noscript>
+      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+    </noscript>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+</body>
+
+</html>
+<style>
+  @import url(https://fonts.googleapis.com/css?family=Open%20Sans);
+  *{
+    font-family: 'open sans';
+  }
+    html {
+        font-size: 13px !important;
+        overflow: hidden;
+    }
+    .basic_border{
+      border: 1px solid rgba(0, 0, 0, 0.575);
+    }
+     ::-webkit-scrollbar {
+        width: 4px;
+        height: 4px;
+    }
+
+     ::-webkit-scrollbar-thumb {
+        background: #888;
+        border-radius: 2px;
+    }
+
+     ::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
+
+    .v-toolbar__content,
+    .v-toolbar__extension {
+        padding: 4px 16px 4px 4px;
+    }
+    /* <------------------------------------------------------------------------------> */
+
+    .v-text-field input {
+        padding: 4px 0px 5px !important;
+    }
+
+    .v-autocomplete.v-input>.v-input__control>.v-input__slot {
+        height: 29px;
+    }
+
+    .v-text-field--outlined.v-input--dense .v-label {
+        top: 6px;
+        background-color: white;
+    }
+
+    .v-text-field--outlined.v-input--dense.v-text-field--outlined>.v-input__control>.v-input__slot {
+        min-height: 28px !important;
+    }
+
+    .v-text-field {
+        margin-top: 7px !important;
+    }
+
+    .v-text-field fieldset {
+        border-color: gray;
+    }
+
+    .v-input {
+        font-size: 13px !important;
+    }
+
+    .v-input .v-label {
+        color: black;
+    }
+
+    .v-radio .v-label {
+        color: black;
+    }
+
+    .v-label {
+        font-size: 13px !important;
+    }
+
+    .v-label--active {
+        top: 8px !important;
+        background-color: transparent !important;
+    }
+
+    .v-textarea .v-label--active {
+        top: 15px !important;
+        background-color: transparent !important;
+    }
+
+    .layout .flex {
+        padding: 0px 4px !important;
+    }
+
+    .v-text-field.v-text-field--enclosed.v-input--dense:not(.v-text-field--solo).v-text-field--outlined .v-input__prepend-outer,
+    .v-text-field.v-text-field--enclosed.v-input--dense:not(.v-text-field--solo).v-text-field--outlined .v-input__prepend-inner,
+    .v-text-field.v-text-field--enclosed.v-input--dense:not(.v-text-field--solo).v-text-field--outlined .v-input__append-inner,
+    .v-text-field.v-text-field--enclosed.v-input--dense:not(.v-text-field--solo).v-text-field--outlined .v-input__append-outer {
+        margin-top: 4px;
+    }
+    /* <-------------------------------------------------------------------------------------. */
+
+    .active {
+        background-color: #99bbe8 !important;
+    }
+
+    .v-dialog {
+        border-radius: 0px;
+    }
+
+    .button .v-btn {
+        margin: 0px 1.5px;
+    }
+
+    td,
+    th {
+        padding: 0px 5px !important;
+        font-size: 13px !important;
+    }
+
+    tbody tr {
+        height: 22px !important;
+    }
+
+    tbody td {
+        height: 22px !important;
+    }
+
+    .v-navigation-drawer__border {
+        display: none !important;
+    }
+
+    .v-list-group__header__append-icon {
+        display: none;
+    }
+
+    .v-application--is-ltr .v-list-group--no-action>.v-list-group__items>.v-list-item {
+        padding-left: 20px !important;
+    }
+
+    .content-tag {
+        margin-top: -10px;
+        padding-left: 10px;
+    }
+
+    .hideFildset .v-input__slot fieldset {
+        display: none !important;
+    }
+
+    .hideFildset td {
+      border: 0.5px solid #e9ecef;
+
+    }
+
+    .hideFildset th {
+      border: 0.5px solid #e9ecef;
+    }
+
+    .hideFildset .v-data-table__wrapper {
+        overflow-x: hidden;
+    }
+
+    .v-treeview-node__content {
+        height: 10px;
+    }
+
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+    /* Firefox */
+
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+
+    .v-select--is-multi .v-select__selections {
+        height: 30px;
+        overflow: hidden;
+    }
+</style>
