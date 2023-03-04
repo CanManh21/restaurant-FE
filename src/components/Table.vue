@@ -5,7 +5,7 @@
         <v-col :cols="responsive ? 12 : 10" class="box rounded-lg">
           <v-card tile flat>
             <v-card-title class="pt-0 ps-1 pe-0 pb-0">
-              Category Manager
+              Table Manager
             </v-card-title>
             <div class="func-box">
               <v-btn class="ma-2 ms-0" outlined color="indigo" small @click="dialog1 = true; selected = false; refetch()">
@@ -13,12 +13,6 @@
               </v-btn>
               <v-btn class="ma-2" outlined color="indigo" small v-show="selected" @click="onEdit();">
                 Edit
-              </v-btn>
-              <v-btn class="ma-2 ms-0" outlined color="indigo" small @click="dialog2 = true; selected = false; refetch()">
-                Import Excel
-              </v-btn>
-              <v-btn class="ma-2 ms-0" outlined color="indigo" small @click="ExportExcel(); selected = false; refetch()">
-                Export Excel
               </v-btn>
               <div style="width: 120px;" class=" float-end">
                 <v-text-field persistent-placeholder placeholder=" " outlined dense height="28" hide-details
@@ -35,7 +29,6 @@
                     @click="selected == item ? selected = null : selected = item;">
                     <td class="ps-3">{{ item._id }}</td>
                     <td>{{ item.name }}</td>
-                    <td>{{ item.description }}</td>
                     <td class="ps-3">{{ item.active ? 'on' : 'off' }}</td>
                   </tr>
                 </template>
@@ -58,7 +51,7 @@
     <v-dialog v-model="dialog1" max-width="420">
       <v-card>
         <v-card-title class="">
-          Category Manager
+          table Manager
         </v-card-title>
         <v-card-text>
           <span class="text-caption">
@@ -71,12 +64,6 @@
             </v-col>
             <v-col cols="12" class="pa-1">
               <v-text-field hide-details v-model="dlg_name" outlined dense label="Name"></v-text-field>
-            </v-col>
-            <v-col cols="12" class="pa-1">
-              <v-textarea hide-details outlined dense label="Description" hint="Hint text"
-                v-model="dlg_description"></v-textarea>
-            </v-col>
-            <v-col cols="12" class="pa-1">
             </v-col>
             <v-col cols="12" class="pa-1">
               <v-switch class="mt-1 " dense label="Active" v-model="dlg_active"></v-switch>
@@ -98,45 +85,6 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-
-    <v-dialog v-model="dialog2" max-width="420">
-      <v-card>
-        <v-card-title class="">
-          Import From Excel
-        </v-card-title>
-        <v-card-text>
-          <span class="text-caption">
-            Restaurant service manager.
-          </span>
-          <v-row class="mt-1">
-            <v-col cols="12" class="pa-1">
-              <div class="body-1">
-                Import Or Drop Files
-              </div>
-            </v-col>
-            <v-col cols="12" class="pa-1">
-              <v-file-input dense truncate-length="15" v-model="dialog2_file"
-                :accept="['application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet']"></v-file-input>
-            </v-col>
-          </v-row>
-        </v-card-text>
-        <v-divider></v-divider>
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn color="primary" text @click="dialog2 = false">
-            Cancel
-          </v-btn>
-          <v-btn color="red" text @click="dialog2_create();">
-            Create
-          </v-btn>
-
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
-
-    <v-overlay :value="overlay">
-      <v-progress-circular indeterminate size="64"></v-progress-circular>
-    </v-overlay>
   </div>
 </template>
 
@@ -156,7 +104,6 @@ export default {
 
     dlg_id: '',
     dlg_name: '',
-    dlg_description: '',
     dlg_active: '',
 
     dialog1: false,
@@ -179,11 +126,6 @@ export default {
       {
         text: 'Name',
         value: 'name',
-        align: 'center',
-      },
-      {
-        text: 'Description',
-        value: 'description',
         align: 'center',
       },
       {
@@ -221,7 +163,7 @@ export default {
         }
       };
       axios
-        .get(this.$store.state.api + 'admin/category' + `?page=${this.page - 1}&limit=${this.limit}`, config)
+        .get(this.$store.state.api + 'admin/table' + `?page=${this.page - 1}&limit=${this.limit}`, config)
         .then(resp => {
           if (resp.data.status == 200) {
             this.table_data = resp.data.data;
@@ -248,7 +190,7 @@ export default {
         }
       };
       axios
-        .get(this.$store.state.api + 'admin/category/count', config)
+        .get(this.$store.state.api + 'admin/table/count', config)
         .then(resp => {
           if (resp.data.status == 200) {
             this.total_page = Math.ceil(resp.data.count / this.limit);
@@ -270,7 +212,7 @@ export default {
 
     dialog_create() {
 
-      if (!this.dlg_id || !this.dlg_name || !this.dlg_description) {
+      if (!this.dlg_id || !this.dlg_name) {
         this.$store.state.Snack.msg = 'Hãy nhập đủ dữ liệu';
         this.$store.state.Snack.color = "error";
         this.$store.state.Snack.show = true;
@@ -281,7 +223,6 @@ export default {
       let datatosend = {
         _id: this.dlg_id,
         name: this.dlg_name,
-        description: this.dlg_description,
         active: this.dlg_active,
       };
 
@@ -292,7 +233,7 @@ export default {
       };
 
       axios
-        .post(this.$store.state.api + 'admin/category', datatosend, config)
+        .post(this.$store.state.api + 'admin/table', datatosend, config)
         .then(resp => {
           if (resp.data.status == 200) {
             this.$store.state.Snack.msg = "Thành công !";
@@ -322,7 +263,7 @@ export default {
 
     dialog_edit() {
 
-      if (!this.dlg_id || !this.dlg_name || !this.dlg_description) {
+      if (!this.dlg_id || !this.dlg_name) {
         this.$store.state.Snack.msg = 'Hãy nhập đủ dữ liệu';
         this.$store.state.Snack.color = "error";
         this.$store.state.Snack.show = true;
@@ -333,7 +274,6 @@ export default {
       let datatosend = {
         _id: this.dlg_id,
         name: this.dlg_name,
-        description: this.dlg_description,
         active: this.dlg_active,
       };
 
@@ -344,7 +284,7 @@ export default {
       };
 
       axios
-        .put(this.$store.state.api + 'admin/category', datatosend, config)
+        .put(this.$store.state.api + 'admin/table', datatosend, config)
         .then(resp => {
           if (resp.data.status == 200) {
             this.$store.state.Snack.msg = "Thành công !";
@@ -371,83 +311,6 @@ export default {
           console.log(err.message)
         });
     },
-
-    dialog2_create() {
-      this.overlay = true;
-      this.dialog2 = false;
-
-      const datatosend = new FormData();
-      datatosend.append('excel', this.dialog2_file);
-      let config = {
-        headers: {
-          authorization: this.$store.state.token
-        }
-      };
-
-      axios
-        .post(this.$store.state.api + 'admin/category/importFromExcel', datatosend, config)
-        .then(resp => {
-          if (resp.data.status == 200) {
-            this.$store.state.Snack.msg = `Thành công: ${resp.data.success_count}
-            Thất bại: ${resp.data.error_count}`;
-            this.$store.state.Snack.color = "success";
-            this.$store.state.Snack.show = true;
-
-            this.refetch();
-            this.selected = false;
-            this.dialog2 = false;
-            this.GetData();
-            this.GetTotalPgae();
-            this.overlay = false;
-
-          } else {
-            this.$store.state.Snack.msg = resp.data.message;
-            this.$store.state.Snack.color = "error";
-            this.$store.state.Snack.show = true;
-            this.overlay = false;
-          }
-          this.overlay = false;
-        })
-        .catch(err => {
-          this.$store.state.Snack.msg = err.message;
-          this.$store.state.Snack.color = "error";
-          this.$store.state.Snack.show = true;
-          this.overlay = false;
-          console.log(err.message)
-        });
-    },
-
-    ExportExcel() {
-      let datatosend = {
-      };
-
-      let config = {
-        headers: {
-          authorization: this.$store.state.token
-        },
-        responseType: 'blob'
-      };
-
-      axios
-        .post(this.$store.state.api + 'admin/category/exportsToExcel', datatosend, config)
-        .then(resp => {
-          console.log(resp);
-          const url = URL.createObjectURL(new Blob([resp.data], {
-            type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-          }))
-          const link = document.createElement('a');
-          link.href = url;
-          link.setAttribute('download', 'category.xlsx');
-          document.body.appendChild(link);
-          link.click()
-        })
-        .catch(err => {
-          this.$store.state.Snack.msg = err.message;
-          this.$store.state.Snack.color = "error";
-          this.$store.state.Snack.show = true;
-          console.log(err.message)
-        });
-    },
     onResize() {
       if (window.innerWidth > 700) {
         this.responsive = false;
@@ -466,14 +329,12 @@ export default {
 
       this.dlg_id = '';
       this.dlg_name = '';
-      this.dlg_description = '';
       this.dlg_active = '';
 
     },
     onEdit() {
       this.dlg_id = this.selected._id;
       this.dlg_name = this.selected.name;
-      this.dlg_description = this.selected.description;
       this.dlg_active = this.selected.active;
 
       this.dialog1 = true;

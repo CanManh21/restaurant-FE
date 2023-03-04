@@ -22,6 +22,14 @@ const routes = [{
         }
     },
     {
+      path: "/table-view/:orderid",
+      component: () =>
+      import ('../components/TableView.vue'),
+      meta: {
+          requiresAuth: true
+      }
+  },
+    {
         path: "/manager/category",
         component: () =>
             import ('../components/Category.vue'),
@@ -29,6 +37,23 @@ const routes = [{
             requiresAuth: true
         }
     },
+    {
+      path: "/manager/dish",
+      component: () =>
+          import ('../components/Dish.vue'),
+      meta: {
+          requiresAuth: true
+      },
+
+  },
+  {
+    path: "/manager/table",
+    component: () =>
+        import ('../components/Table.vue'),
+    meta: {
+        requiresAuth: true
+    }
+  },
 
 
 ]

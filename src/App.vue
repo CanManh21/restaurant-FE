@@ -115,7 +115,6 @@
 import {
   screenHeight
 } from "./Mixins/screenheight";
-import axios from "axios";
 export default {
   mixins: [screenHeight],
   components: {},
